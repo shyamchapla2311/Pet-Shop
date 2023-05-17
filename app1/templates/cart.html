@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% if noitem > 0 %}
+
+<head>
+    <style>
+        .signbox{
+    margin: 0 auto;
+    padding: 0 auto;
+}
+a{
+    color: black;
+}
+a:hover{
+    color:darkcyan;
+    text-decoration: none;
+}
+body{
+    font-family: cursive;
+    color: #444444;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.section-products {
+    padding: 80px 0 54px;
+}
+.section-products .header {
+    margin-bottom: 30px;
+}
+.section-products .header h3 {
+    font-size: 1rem;
+    color: #fe302f;
+    font-weight: 500;
+}
+.section-products .header h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #444444;
+}
+.section-products .single-product .part-2 .product-title {
+    font-size: 1rem;
+    color: #444444;
+}
+
+.brand {
+    font-size: 13px
+}
+.dis-price {
+    text-decoration: line-through;
+    color: black;
+}
+.about {
+    font-size: 20px;
+    text-align: justify;
+}
+.navbar-nav li{
+    margin: 10px;
+}
+@media (min-width: 1025px) {
+.h-custom {
+height: 100vh !important;
+}
+}
+</style>
+</head>
+
+
+    <section class=" h-custom">
+        <div class="container  py-5">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <div class="table-responsive">
+                <table class="table table-responsive-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="h5">Shopping Bag</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Total Price</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for i in cartlist %}
+                    <tr>
+                      <th scope="row">
+                        <div class="d-flex align-items-center">
+                          <img src="{{i.productimage.url}}" class="img-fluid rounded-3"
+                            style="width: 120px;" alt="Book">
+                          <div class="flex-column ms-4">
+                            <p class="mb-2">{{i.productname}}</p>
+                            <p class="mb-0">{{i.productdis}}</p>
+                          </div>
+                        </div>
+                      </th>
+                      <td class="align-middle">
+                        <div class="d-flex flex-row">
+                          {% comment %} <a href="{% url 'addcart' i.id %}">
+                          <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                          </a> {% endcomment %}
+                          <a href="{% url 'addcart' i.id %}">
+                            <button > +
+                            </button>
+                            </a>
+                          <input id="form1" min="0" name="quantity" value="{{i.productquantity}}" type="number"
+                            class="form-control form-control-sm" style="width: 50px;" readonly />
+                            
+                            <a href="{% url 'subnocart' i.id %}">
+                              <button > -
+                              </button>
+                              </a>
+                          {% comment %} <button class="btn btn-link px-2"
+                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                            <i class="fas fa-plus"></i>
+                          </button> {% endcomment %}
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <p class="mb-0" style="font-weight: 500;">{{i.producttotalprice}}</p>
+                      </td>
+                      <td class="align-middle">
+                        <a href="{% url 'cdelete' i.id %}" class="mb-0" style="font-weight: 500;">Delete</a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+                      <button type="button" class="btn btn-primary btn-block btn-lg " style="width: 100%;">
+                        <div class=" justify-content-between">
+                         <center>
+                          <a  href="{% url 'shiping' %}">Checkout
+                            <span>Checkout</span>
+                            <span></span>
+                          </a>
+                        </center>
+                        </div>
+                      </button>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {% else %}
+
+<h1>Go for Shopping</h1>
+{% endif %}
+    {% endblock %}

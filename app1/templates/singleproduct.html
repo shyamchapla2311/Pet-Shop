@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+   <!-- Open Content -->
+   <section class="mt-5">
+    <div class="container p-3" style="border-radius: 30px; background-color: #7AB730; ">
+      <div class="row">
+        <div class="col-lg-6 mt-1">
+          <div class="card mb-3 " style="border-radius: 30px;padding-bottom: 40px; height:55vh;">
+            <div style="  width:400px; height:300px; margin:0 auto;">
+            <img style="border-radius: 30px;  height:100%; width:100%"
+              class="card-img img-fluid mt-4"
+            src="{{product.productImage.url}}"
+              alt="Card image cap"
+              id="product-detail"  />
+            </div>
+          </div>
+        </div>
+        <!-- col end -->
+        <div class="col-lg-6 mt-1 " >
+          <div class="card"  style="border-radius: 30px;  height:55vh;">
+            <div class="card-body">
+              <h1 class="h2">{{product.productName}}</h1>
+              <p class="h3 py-2">{{product.productPrice}}</p>
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <h6>Brand:</h6>
+                </li>
+                <li class="list-inline-item">
+                  <p class="text-muted"><strong>{{product.category}}</strong></p>
+                </li>
+              </ul>
+
+              <h6>Description:</h6>
+              <blockquote>
+                What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                 {{product.productDescription}}
+              </blockquote>
+              
+
+              
+
+              {% comment %} <form action="" method="GET"> {% endcomment %}
+                <input
+                  type="hidden"
+                  name="product-title"
+                  value="Activewear" />
+                
+                <div class="row pb-3">
+                  <div class="col d-grid">
+                    <form method='POST' action="{% url 'direct_buy' %}">
+                      {% csrf_token %}
+                      <input type="hidden" value="{{product.id}}" name='id'>
+                    <button
+                      type="submit"
+                      class="btn btn-success btn-lg" style="background-color: #7AB730 ; border: 0;"
+                      name="submit"
+                      value="buy">
+                      Buy
+                    </button>
+                  </form>
+                  </div>
+                  <div class="col d-grid">
+                    
+                    <form method='POST'>
+                      {% csrf_token %}
+                      
+                    <button
+                      type="submit"
+                      class="btn btn-success btn-lg" style="background-color: #7AB730 ; border: 0;"
+                      name="submit"
+                      value="addtocard">
+                      Add To Cart
+                    </button>
+                    </form>
+                  </div>
+                </div>
+              {% comment %} </form> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if m %}
+  <script>alert("{{ m }}")</script>
+  {% endif %}
+  {% endblock %}

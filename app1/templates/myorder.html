@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <script src="htpp://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
+    <script>
+     $(document).ready( function () {
+        $('#demo').DataTable();
+    } );
+    </script>
+  </head>
+    <div class="container-fluid">
+<table id="demo" class="table table-striped " style="width:100%">
+    <thead>
+        <tr>
+            <th >Order Id</th>
+            <th>Order Amount</th>
+            <th>TransactionId</th>
+            <th>Date</th>
+            <th>View</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in order %}
+        
+        <tr>
+            
+            <td>{{i.id}}</td>
+            <td > 
+               {{i.orderAmount}}</td>
+            
+             <td>{{i.transactionId}}</td>
+            
+            <td>{{i.orderDate}}</td>
+            <td><a href="{% url 'MyorderdetaislView' i.id %}" class="nav-item nav-link">View</a></td>
+            
+        </tr>
+       
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

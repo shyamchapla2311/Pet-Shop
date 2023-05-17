@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %} 
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+      <div class="container">
+
+        {% if m %}
+          <script>alert({{m}})</script>
+        {% endif %}
+        <div
+          class="border-start border-5 border-primary ps-5 mb-5"
+          style="max-width: 600px">
+          <h6 class="text-primary text-uppercase">Products Category</h6>
+          <h1 class="display-5 text-uppercase mb-0">
+            Products For Your Best Friends
+          </h1>
+        </div>
+        <div class="owl-carousel product-carousel">
+          {% for i in category %}
+          <div class="pb-5">
+            <div
+              class="product-item position-relative bg-light d-flex flex-column text-center">
+              <img class="img-fluid mb-4" src="{{i.img.url}}" alt="" />
+              <h6 class="text-uppercase">{{i.name}}</h6>
+              <div class="btn-action d-flex justify-content-center">
+                <a class="btn btn-primary py-2 px-3" href="{% url 'productcat' i.id %}"
+                  ><i class="bi bi-eye"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+    <div class="container-fluid py-5">
+      <div class="container">
+        <div
+          class="border-start border-5 border-primary ps-5 mb-5"
+          style="max-width: 600px">
+          <h6 class="text-primary text-uppercase">Products</h6>
+          <h1 class="display-5 text-uppercase mb-0">
+            Products For Your Best Friends
+          </h1>
+        </div>
+        {% if sessionvendor %}
+        <div class="owl-carousel product-carousel">
+          {% for i in productdata %}
+          <div class="pb-5">
+            <div
+              class="product-item position-relative bg-light d-flex flex-column text-center">
+              <img class="img-fluid mb-4" src="{{i.productImage.url}}" alt="" />
+              <h6 class="text-uppercase">{{i.productName}}</h6>
+              <h5 class="text-primary mb-0">₹ {{i.productPrice}}</h5>
+              <div class="btn-action d-flex justify-content-center">
+                {% comment %} <a class="btn btn-primary py-2 px-3" href="{% url 'add_to_cart' i.id %}"
+                  ><i class="bi bi-cart"></i
+                ></a>
+                <a class="btn btn-primary py-2 px-3" href="{% url 'singleproduct' i.id %}"
+                  ><i class="bi bi-eye"></i
+                ></a> {% endcomment %}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+         
+        </div>
+        {% else %}
+        <div class="owl-carousel product-carousel">
+          {% for i in productdata %}
+          <div class="pb-5">
+            <div
+              class="product-item position-relative bg-light d-flex flex-column text-center">
+              <img class="img-fluid mb-4" src="{{i.productImage.url}}" alt="" />
+              <h6 class="text-uppercase">{{i.productName}}</h6>
+              <h5 class="text-primary mb-0">₹ {{i.productPrice}}</h5>
+              <div class="btn-action d-flex justify-content-center">
+                <a class="btn btn-primary py-2 px-3" href="{% url 'add_to_cart' i.id %}"
+                  ><i class="bi bi-cart"></i
+                ></a>
+                <a class="btn btn-primary py-2 px-3" href="{% url 'singleproduct' i.id %}"
+                  ><i class="bi bi-eye"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+         
+        </div>
+        {% endif %}
+      </div>
+      {% if m %}
+  <script>alert("{{ m }}")</script>
+    {% endif %}
+    </div>
+    {% endblock %}

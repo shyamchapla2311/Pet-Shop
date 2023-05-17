@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<head>
+    <style>
+        .signbox{
+    margin: 0 auto;
+    padding: 0 auto;
+    /* background-color: #7AB730; */
+}
+a{
+    color: black;
+}
+a:hover{
+    color:darkcyan;
+    text-decoration: none;
+}
+body{
+    font-family: cursive;
+    color: #444444;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.section-products {
+    padding: 80px 0 54px;
+}
+.section-products .header {
+    margin-bottom: 30px;
+}
+.section-products .header h3 {
+    font-size: 1rem;
+    color: #fe302f;
+    font-weight: 500;
+}
+.section-products .header h2 {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #444444;
+}
+.section-products .single-product .part-2 .product-title {
+    font-size: 1rem;
+    color: #444444;
+}
+
+.brand {
+    font-size: 13px
+}
+.dis-price {
+    text-decoration: line-through;
+    color: black;
+}
+.about {
+    font-size: 20px;
+    text-align: justify;
+}
+.navbar-nav li{
+    margin: 10px;
+}
+</style>
+</head>
+
+
+
+    <div class="col-md-8 col-lg-6 col-xl-4 mt-3 signbox ">
+        <form method="POST"  enctype="multipart/form-data">
+      {% csrf_token %}
+          <div class="align-items-center justify-content-center justify-content-lg-start text-center">
+           <h1 style="font-family: cursive; background-color: #7AB730; border-radius: 30px; padding: 50px;"> User SignUp </h1>
+          </div>
+          
+          <!-- username input -->
+          <div class="form-outline  mt-5">
+              <label class="form-label" for="form3Example3">Username</label>
+              <input type="text" name="username" class="form-control form-control-lg" placeholder="Enter Your Name" />
+            </div>
+          <!-- Email input -->
+          <div class="form-outline  ">
+              <label class="form-label"  for="form3Example3">E-mail Address</label>
+            <input type="email" id="#" name="useremail" class="form-control form-control-lg" placeholder="Enter Your E-mail" />
+          </div>
+
+          <!-- number input -->
+          <div class="form-outline  ">
+              <label class="form-label" for="form3Example3"> Number</label>
+              <input type="number" id="#" name="usercontactno" class="form-control form-control-lg" placeholder="Enter Your Number" />
+            </div>
+
+            <!-- gender input -->
+          <div class="form-outline  mb-2">
+              <input type="radio" name="usergender" value="Male"> Male
+              <input type="radio" name="usergender" value="Female"> Female
+              <input type="radio" name="usergender" value="Other"> Others
+            </div>
+          <!--DOB input-->  
+          <div class="form-outline ">
+            <label class="form-label" for="form3Example4">Date Of Birth</label>
+            <input type="date" name="user_DOB" id="form3Example4" class="form-control form-control-lg" />
+          </div>
+
+          <!--address input-->  
+          <div class="form-outline ">
+            <label class="form-label" for="form3Example4">Address</label>
+            <textarea type="text" name="user_address" id="form3Example4" class="form-control form-control-lg" placeholder="Enter Your Address" ></textarea>
+          </div>
+
+          <div class="form-outline ">
+            <label class="form-label" for="form3Example4">User Image</label>
+            <input type="file" name="userimage" accept="image/*" class="form-control form-control-lg"/>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline ">
+            <label class="form-label" for="form3Example4">Password</label>
+            <input type="password" name="userpassword" id="form3Example4" class="form-control form-control-lg" placeholder="Enter Password" />
+          </div>
+
+          <div class="text-center text-lg-start mt-2 pt-2 mb-5">
+            <button type="submit" class="btn btn-info  btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem; background-color: #7AB730; border: 0;">Sign Up</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account?<br> <a href="{% url 'userlogin' %}" class="link-danger text-dark">Sign In</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% if messagekey %}
+  <script>alert("{{ messagekey }}")</script>
+  {% endif %}
+
+{% endblock %}
